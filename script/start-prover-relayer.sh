@@ -3,12 +3,12 @@
 set -eou pipefail
 
 if [ "$ENABLE_PROVER" == "true" ]; then
-    if [ ! -f "./wait" ];then
-        wget https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait
-        chmod +x ./wait
+    if [ ! -f "/script/wait" ];then
+        wget https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait -O /script/wait
+        chmod +x /script/wait
     fi
 
-    WAIT_HOSTS=zkevm-chain-prover-rpcd:9000 WAIT_TIMEOUT=180 ./wait
+    WAIT_HOSTS=zkevm-chain-prover-rpcd:9000 WAIT_TIMEOUT=180 /script/wait
 
     taiko-client prover \
         --l1.ws ${L1_ENDPOINT_WS} \
